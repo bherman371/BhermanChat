@@ -1,4 +1,4 @@
-package com.bherman371.bhermanchat;
+package com.bherman371.chernochat;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

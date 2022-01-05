@@ -7,12 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 import java.awt.Font;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 
@@ -26,6 +25,9 @@ public class Login extends JFrame {
 	private JLabel lblAddressDesc;
 	private JLabel lblPortDesc;
 
+	/**
+	 * Creates the login frame.
+	 */
 	public Login() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -84,9 +86,25 @@ public class Login extends JFrame {
 		contentPane.add(lblPortDesc);
 		
 		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = txtName.getText();
+				String address = txtAddress.getText();
+				int port = Integer.parseInt(txtPort.getText());
+				login(name, address, port);
+			}
+		});
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnLogin.setBounds(100, 281, 85, 24);
+		btnLogin.setBounds(100, 304, 85, 24);
 		contentPane.add(btnLogin);
+	}
+	
+	/**
+	 * Logs the user in.
+	 */
+	private void login(String name, String address, int port) {
+		dispose();
+		System.out.println(name + " " + address + " " + port);
 	}
 	
 	public static void main(String[] args) {

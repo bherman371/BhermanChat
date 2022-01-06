@@ -28,6 +28,9 @@ public class Client extends JFrame {
 		createWindow();
 	}
 	
+	/**
+	 * Creates the client window.
+	 */
 	private void createWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(880, 550);

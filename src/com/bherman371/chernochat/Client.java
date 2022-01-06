@@ -35,16 +35,15 @@ public class Client extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
+	private JTextField txtMessage;
+	private JTextArea history;
 	
 	private String name, address;
 	private int port;
-	private JTextField txtMessage;
-	private JTextArea history;
 	
 	// Socket is TCP; DatagramSocket is UDP
 	private DatagramSocket socket; // sending and receiving packets
 	private InetAddress ip; // ip address
-	
 	private Thread send;
 
 	/**

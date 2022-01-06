@@ -37,6 +37,8 @@ public class Client extends JFrame {
 	// Socket is TCP; DatagramSocket is UDP
 	private DatagramSocket socket; // sending and receiving packets
 	private InetAddress ip; // ip address
+	
+	private Thread send;
 
 	/**
 	 * Creates the client.
@@ -92,6 +94,24 @@ public class Client extends JFrame {
 		}
 		String message = new String(packet.getData());
 		return message;
+	}
+	
+	/**
+	 * Sends packets.
+	 * @param data
+	 */
+	private void send(final byte[] data) {
+		send = new Thread("Send") {
+			public void run() {
+				DatagramPacket packet = new DatagramPacket(data, data.length, ip, port);
+				try {
+					socket.send(packet);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		send.start();
 	}
 	
 	/**

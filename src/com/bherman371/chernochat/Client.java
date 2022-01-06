@@ -11,6 +11,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Client extends JFrame {
 
@@ -71,6 +75,13 @@ public class Client extends JFrame {
 		
 		// text input field
 		txtMessage = new JTextField();
+		txtMessage.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					send(txtMessage.getText());
+				}
+			}
+		});
 		GridBagConstraints gbc_txtMessage = new GridBagConstraints();
 		gbc_txtMessage.insets = new Insets(0, 0, 0, 5);
 		gbc_txtMessage.fill = GridBagConstraints.HORIZONTAL;
@@ -81,6 +92,11 @@ public class Client extends JFrame {
 		
 		// send button
 		JButton btnNewButton = new JButton("Send");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				send(txtMessage.getText());
+			}
+		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton.gridx = 2;
@@ -90,6 +106,17 @@ public class Client extends JFrame {
 		setVisible(true);
 		
 		txtMessage.requestFocusInWindow();
+	}
+	
+	/**
+	 * Sends a message in the text history.
+	 * @param message
+	 */
+	private void send(String message) {
+		if (message.equals("")) return;
+		message = name + ": " + message;
+		console(message);
+		txtMessage.setText("");
 	}
 	
 	/**

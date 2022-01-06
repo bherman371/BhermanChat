@@ -1,20 +1,21 @@
 package com.bherman371.chernochat;
 
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class Client extends JFrame {
 
@@ -25,7 +26,7 @@ public class Client extends JFrame {
 	private String name, address;
 	private int port;
 	private JTextField txtMessage;
-	private JTextArea txtrHistory;
+	private JTextArea history;
 
 	/**
 	 * Creates the client.
@@ -61,17 +62,18 @@ public class Client extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		// text history area
-		txtrHistory = new JTextArea();
-		txtrHistory.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtrHistory.setEditable(false);
-		GridBagConstraints gbc_txtrHistory = new GridBagConstraints();
-		gbc_txtrHistory.insets = new Insets(0, 0, 5, 5);
-		gbc_txtrHistory.fill = GridBagConstraints.BOTH;
-		gbc_txtrHistory.gridx = 1;
-		gbc_txtrHistory.gridy = 1;
-		gbc_txtrHistory.gridwidth = 2;
-		gbc_txtrHistory.insets = new Insets(0, 5, 0, 0); // top, left, bottom, right
-		contentPane.add(txtrHistory, gbc_txtrHistory);
+		history = new JTextArea();
+		history.setFont(new Font("Arial", Font.PLAIN, 12));
+		history.setEditable(false);
+		JScrollPane scroll = new JScrollPane(history);
+		GridBagConstraints scrollConstraints = new GridBagConstraints();
+		scrollConstraints.insets = new Insets(0, 0, 5, 5);
+		scrollConstraints.fill = GridBagConstraints.BOTH;
+		scrollConstraints.gridx = 1;
+		scrollConstraints.gridy = 1;
+		scrollConstraints.gridwidth = 2;
+		scrollConstraints.insets = new Insets(0, 5, 0, 0); // top, left, bottom, right
+		contentPane.add(scroll, scrollConstraints);
 		
 		// text input field
 		txtMessage = new JTextField();
@@ -124,7 +126,8 @@ public class Client extends JFrame {
 	 * @param message
 	 */
 	public void console(String message) {
-		txtrHistory.append(message + "\n\r");
+		history.append(message + "\n\r");
+		history.setCaretPosition(history.getDocument().getLength());
 	}
 
 }

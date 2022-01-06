@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 
 public class Client extends JFrame {
 
@@ -20,6 +21,7 @@ public class Client extends JFrame {
 	private String name, address;
 	private int port;
 	private JTextField txtMessage;
+	private JTextArea txtrHistory;
 
 	/**
 	 * Creates the client.
@@ -31,6 +33,8 @@ public class Client extends JFrame {
 		this.port = port;
 		
 		createWindow();
+		
+		console("Attempting a connection to " + address + ":" + port + ", user: " + name);
 	}
 	
 	/**
@@ -53,7 +57,8 @@ public class Client extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		// text history area
-		JTextArea txtrHistory = new JTextArea();
+		txtrHistory = new JTextArea();
+		txtrHistory.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtrHistory.setEditable(false);
 		GridBagConstraints gbc_txtrHistory = new GridBagConstraints();
 		gbc_txtrHistory.insets = new Insets(0, 0, 5, 5);
@@ -83,6 +88,12 @@ public class Client extends JFrame {
 		contentPane.add(btnNewButton, gbc_btnNewButton);
 		
 		setVisible(true);
+		
+		txtMessage.requestFocusInWindow();
+	}
+	
+	public void console(String message) {
+		txtrHistory.append(message + "\n\r");
 	}
 
 }

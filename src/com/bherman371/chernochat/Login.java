@@ -16,7 +16,9 @@ import java.awt.event.ActionEvent;
 public class Login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
+	
 	private JTextField txtName;
 	private JTextField txtAddress;
 	private JLabel lblAddress;
@@ -29,13 +31,12 @@ public class Login extends JFrame {
 	 * Creates the login frame.
 	 */
 	public Login() {
+		setResizable(false);
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		setResizable(false);
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(300, 380);
@@ -104,9 +105,13 @@ public class Login extends JFrame {
 	 */
 	private void login(String name, String address, int port) {
 		dispose();
-		System.out.println(name + " " + address + " " + port);
+		new Client(name, address, port);
 	}
 	
+	/**
+	 * Launches the login window.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

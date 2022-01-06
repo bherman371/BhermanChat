@@ -92,6 +92,10 @@ public class Client extends JFrame {
 		txtMessage.requestFocusInWindow();
 	}
 	
+	/**
+	 * Prints messages to the text history.
+	 * @param message
+	 */
 	public void console(String message) {
 		txtrHistory.append(message + "\n\r");
 	}

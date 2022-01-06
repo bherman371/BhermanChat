@@ -1,15 +1,23 @@
 package com.bherman371.chernochat.server;
 
+/**
+ * ServerMain.java
+ * 
+ * Runs the server defined by Server.java.
+ * 
+ * @author benja
+ */
 public class ServerMain {
-
+	
 	private int port;
+	private Server server;
 	
 	/**
 	 * Creates the server.
 	 */
 	public ServerMain(int port) {
 		this.port = port;
-		System.out.println(port);
+		server = new Server(port);
 	}
 	
 	/**
